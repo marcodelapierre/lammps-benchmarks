@@ -4,9 +4,9 @@
 # settable from command line
 # epsilon, sigma, mass set below
 
-variable	x index 30
-variable	y index 30
-variable	z index 30
+variable	x index 50
+variable	y index 50
+variable	z index 50
 variable        rhostar index 0.8842
 variable        dt index 0.005
 variable        cutoff index 2.5
