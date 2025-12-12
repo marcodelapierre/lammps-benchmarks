@@ -1,0 +1,39 @@
+# water (SPC/FW)
+
+#@ 2 atom types
+
+variable O2  equal 1  # water
+variable H2  equal 2  #
+
+mass ${O2}  16.000
+mass ${H2}   1.010
+
+set type ${O2}  charge    -0.820000 
+set type ${H2}  charge     0.410000 
+
+#@  1 bond types
+
+bond_style  harmonic
+#@ O2 - H2   
+bond_coeff   1   22.965000      1.0120000                 
+
+#@ 1 angle types
+
+angle_style  harmonic 
+#@ H2 - O2 - H2 
+angle_coeff   1   1.6456800    113.24000                              
+
+variable rmax  equal 9.
+variable rcoul equal 9.
+
+pair_style lj/cut/coul/long ${rmax} ${rcoul}
+
+pair_coeff     ${O2}   ${O2}             0.00674        3.165492  # dG=                 
+pair_coeff     ${O2}   ${H2}             0.00000        3.165492  # dG=                 
+pair_coeff     ${H2}   ${H2}             0.00000        3.165492  # dG=                 
+pair_modify tail yes
+
+special_bonds lj 0.  0.  0.  coul 0.  0.  0.
+
+kspace_style pppm 1.0e-5
+kspace_modify fftbench no
